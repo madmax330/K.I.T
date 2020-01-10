@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivationActivity"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/logoView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_white"/>
+
+    <include layout="@layout/form_activation"
+        android:id="@+id/activationForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/logoView"
+        android:layout_margin="8dp" />
+
+    <include layout="@layout/form_family"
+        android:id="@+id/familyForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/logoView"
+        android:layout_margin="8dp"
+        android:visibility="invisible" />
+
+    <include android:id="@+id/familiesLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        layout="@layout/dialog_families"
+        android:visibility="gone"/>
+
+    <include android:id="@+id/loadingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        layout="@layout/dialog_loading"
+        android:visibility="invisible" />
+
+</RelativeLayout>

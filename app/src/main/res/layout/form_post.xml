@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/userImageView"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/default_avatar" />
+
+    <TextView
+        android:id="@+id/userNameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/userImageView"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/userImageView"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="@string/three_dots"
+        android:textColor="#333"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/userImageView">
+
+        <EditText
+            android:id="@+id/postMessageInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@android:color/transparent"
+            android:ems="10"
+            android:hint="@string/what_do_you_want_to_post"
+            android:inputType="textCapSentences"
+            android:textColor="#333"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/postImageView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"/>
+
+        <RelativeLayout
+            android:id="@+id/asKeyboardToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/grey">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/add_picture"
+                android:textColor="#333"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@+id/textView7"
+                app:srcCompat="@drawable/image" />
+
+            <Button
+                android:id="@+id/addImageBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent" />
+
+            <Button
+                android:id="@+id/removeImageBtn"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/times"
+                android:backgroundTint="#000"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:visibility="invisible"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

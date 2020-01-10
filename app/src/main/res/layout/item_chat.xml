@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/chatImageView"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/default_avatar" />
+
+    <TextView
+        android:id="@+id/chatNameView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/chatImageView"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="60dp"
+        android:layout_toEndOf="@+id/chatImageView"
+        android:maxLines="1"
+        android:text="@string/three_dots"
+        android:textColor="#333"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/latestMessageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/chatNameView"
+        android:layout_below="@+id/chatNameView"
+        android:layout_marginEnd="60dp"
+        android:maxLines="1"
+        android:text="@string/three_dots"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/latestActivityView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/latestMessageView"
+        android:layout_marginEnd="60dp"
+        android:maxLines="1"
+        android:text="@string/three_dots"
+        android:textSize="11sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/latestActivityView"
+        android:layout_toEndOf="@+id/chatImageView"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorAccent"></LinearLayout>
+
+
+</RelativeLayout>

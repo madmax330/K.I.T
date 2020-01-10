@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bss.maxencecoulibaly.familychat">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SignInActivity"
+            android:label="@string/sign_in"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChatActivity"
+            android:parentActivityName=".ChatsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/profile"
+            android:parentActivityName=".ProfilesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MapActivity"
+            android:label="@string/family_map"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProfilesActivity"
+            android:label="@string/family_directory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FeedActivity"
+            android:label="@string/family_feed"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewPostActivity"
+            android:label="@string/new_post"
+            android:parentActivityName=".FeedActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".NewChatActivity"
+            android:label="@string/new_chat"
+            android:parentActivityName=".ChatsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GroupDetailsActivity"
+            android:label="@string/group_details"
+            android:parentActivityName=".ChatsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:label="@string/edit_profile"
+            android:parentActivityName=".ProfileActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".LinkProfileActivity"
+            android:label="@string/link_profile"
+            android:parentActivityName=".EditProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CommentsActivity"
+            android:label="@string/comments"
+            android:parentActivityName=".FeedActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".LikesActivity"
+            android:label="@string/likes"
+            android:parentActivityName=".FeedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChatsActivity"
+            android:label="@string/chats"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings"
+            android:parentActivityName=".ProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MyPostsActivity"
+            android:label="@string/my_posts"
+            android:parentActivityName=".ProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+
+        <activity android:name=".NotificationsActivity"
+            android:label="@string/notifications"
+            android:parentActivityName=".ProfileActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="OPEN_NOTIFICATIONS_ACTIVITY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBbuuIn6hd8kxE3AiAfCnKmfQC3bE-puhI" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <service
+            android:name=".utils.services.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!--
+     Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo_trimmed" />
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/white" />
+
+    </application>
+
+</manifest>

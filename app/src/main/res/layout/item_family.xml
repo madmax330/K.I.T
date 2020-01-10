@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/familyNameView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/familyNotificationsView"
+        android:text="@string/family"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/familyNotificationsView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:padding="12dp"
+        android:text="@string/notified"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimaryDark"/>
+
+    <TextView
+        android:id="@+id/familyCodeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_below="@+id/familyNameView"
+        android:text="@string/three_dots"
+        android:textSize="14sp"
+        android:textColor="#aaa"/>
+
+</RelativeLayout>

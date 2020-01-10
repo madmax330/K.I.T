@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/userImageView"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/default_avatar" />
+
+    <TextView
+        android:id="@+id/likeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/userImageView"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/userImageView"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rounded_corners_comment"
+        android:text="@string/six_dots"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:textColor="#333"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/likeTimeView"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_alignBottom="@+id/userImageView"
+        android:layout_alignStart="@+id/likeTextView"
+        android:layout_below="@+id/likeTextView"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:text="@string/three_dots"
+        android:textSize="10sp" />
+
+</RelativeLayout>

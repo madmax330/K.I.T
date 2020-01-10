@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<LinearLayout
+    android:id="@+id/sCell"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_alignParentStart="true"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/rounded_corner_sender_cell"
+    android:visibility="invisible">
+
+    <TextView
+        android:id="@+id/sMsgDateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/three_dots"
+        android:textSize="10sp"
+        android:textColor="@color/white"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <ImageView
+        android:id="@+id/sMsgImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:background="@drawable/rounded_imageview"
+        android:layout_margin="8dp"
+        android:outlineProvider="background"/>
+
+    <TextView
+        android:id="@+id/sMsgView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textIsSelectable="true"
+        android:text="@string/three_dots"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-condensed"
+        android:textAlignment="textStart"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"/>
+
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_alignParentStart="true"
+    android:id="@+id/rCell"
+    android:layout_marginEnd="40dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/rounded_corner_receiver"
+    android:visibility="invisible">
+
+    <TextView
+        android:id="@+id/msgSenderView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:textStyle="bold"
+        android:textSize="11sp"
+        android:text="@string/three_dots"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/rMsgDateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/three_dots"
+        android:textSize="10sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"/>
+
+    <ImageView
+        android:id="@+id/rMsgImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:scaleType="fitCenter"
+        android:background="@drawable/rounded_imageview"
+        android:outlineProvider="background"/>
+
+    <TextView
+        android:id="@+id/rMsgView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textIsSelectable="true"
+        android:text="@string/three_dots"
+        android:textSize="14sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="sans-serif-condensed"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"/>
+
+</LinearLayout>
+
+</RelativeLayout>

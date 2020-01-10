@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/userImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/default_avatar" />
+
+    <TextView
+        android:id="@+id/userNameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/userImageView"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/userImageView"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="@string/three_dots"
+        android:textColor="#000"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/postTimeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/userNameView"
+        android:layout_below="@+id/userNameView"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="@string/three_dots"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/postTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/postImageView"
+        android:layout_below="@id/postTimeView"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:maxLines="4"
+        android:text="@string/six_dots"
+        android:textColor="#333"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/postImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/postTextView"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/likeBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/postTextView"
+        android:layout_below="@+id/postImageView"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/like" />
+
+    <TextView
+        android:id="@+id/likesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/likeBtn"
+        android:layout_alignTop="@+id/likeBtn"
+        android:layout_toEndOf="@+id/likeBtn"
+        android:gravity="center_vertical"
+        android:text="@string/zero"
+        android:textColor="#333"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/commentsBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/likesText"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/likesText"
+        android:background="@drawable/comment" />
+
+    <TextView
+        android:id="@+id/commentsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/commentsBtn"
+        android:layout_alignTop="@+id/commentsBtn"
+        android:layout_toEndOf="@+id/commentsBtn"
+        android:gravity="center_vertical"
+        android:text="@string/zero"
+        android:textColor="#333"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/commentsText"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorAccent"></LinearLayout>
+
+</RelativeLayout>

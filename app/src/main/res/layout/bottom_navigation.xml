@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:orientation="horizontal"
+    android:paddingBottom="5dp">
+
+    <RelativeLayout
+        android:id="@+id/mapTab"
+        android:layout_width="50dp"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/mapIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/mapLabel"
+            android:src="@drawable/tab_map"
+            android:layout_marginBottom="-8dp"/>
+
+        <TextView
+            android:id="@+id/mapLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:textAlignment="center"
+            android:text="@string/map"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="8sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/chatsTab"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp">
+
+        <ImageView
+            android:id="@+id/chatsIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/chatsLabel"
+            android:src="@drawable/tab_chats"
+            android:layout_marginBottom="-8dp"/>
+
+        <TextView
+            android:id="@+id/chatsLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:textAlignment="center"
+            android:text="@string/chats"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="8sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/feedTab"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp">
+
+        <ImageView
+            android:id="@+id/feedIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/feedLabel"
+            android:src="@drawable/tab_home"
+            android:layout_marginBottom="-8dp"/>
+
+        <TextView
+            android:id="@+id/feedLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:textAlignment="center"
+            android:text="@string/feed"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="8sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/directoryTab"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp">
+
+        <ImageView
+            android:id="@+id/directoryIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/directoryLabel"
+            android:src="@drawable/tab_users"
+            android:layout_marginBottom="-8dp"/>
+
+        <TextView
+            android:id="@+id/directoryLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:textAlignment="center"
+            android:text="@string/directory"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="8sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/profileTab"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp">
+
+        <ImageView
+            android:id="@+id/profileIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/profileLabel"
+            android:src="@drawable/tab_profile"
+            android:layout_marginBottom="-8dp"/>
+
+        <TextView
+            android:id="@+id/profileLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:textAlignment="center"
+            android:text="@string/profile"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="8sp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

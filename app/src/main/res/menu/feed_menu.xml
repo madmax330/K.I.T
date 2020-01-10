@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/newPostBtn"
+        android:title="@string/new_post"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/changeFamilyBtn"
+        android:title="@string/change_family"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/joinFamilyBtn"
+        android:title="@string/join_family"
+        app:showAsAction="never"/>
+
+</menu>
