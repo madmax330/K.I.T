@@ -86,9 +86,7 @@ public class ChatActivity extends AppCompatActivity {
     private String mChatName;
     private String mChatPhotoUrl;
 
-    private boolean mGroupChat;
     private String mLastUserId = "test";
-    private Map<String, Profile> mGroupParticipants;
 
     private String mUid;
     private String mUsername;
@@ -132,9 +130,8 @@ public class ChatActivity extends AppCompatActivity {
         mChatUserId = getIntent().getStringExtra(Constants.EXTRA_CHAT_USER_ID);
         mChatName = getIntent().getStringExtra(Constants.EXTRA_CHAT_NAME);
         mChatPhotoUrl = getIntent().getStringExtra(Constants.EXTRA_CHAT_PHOTOURL);
-        mGroupChat = (getIntent().getStringExtra(Constants.EXTRA_GROUP_CHAT) != null);
 
-        if(mChatToastMsg != null) {
+        if (mChatToastMsg != null) {
             Toast.makeText(this, mChatToastMsg, Toast.LENGTH_SHORT).show();
         }
 
@@ -180,7 +177,7 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void addImage() {
-                if(GeneralUtil.checkCameraPermission(ChatActivity.this) && GeneralUtil.checkStoragePermission(ChatActivity.this)) {
+                if (GeneralUtil.checkCameraPermission(ChatActivity.this) && GeneralUtil.checkStoragePermission(ChatActivity.this)) {
                     Intent pickIntent = new Intent();
                     pickIntent.setType("image/*");
                     pickIntent.setAction(Intent.ACTION_GET_CONTENT);
@@ -205,15 +202,14 @@ public class ChatActivity extends AppCompatActivity {
                     String title = getResources().getString(R.string.take_or_select_picture);
 
                     Intent intent = Intent.createChooser(pickIntent, title);
-                    intent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {takeIntent});
+                    intent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{takeIntent});
 
                     mNoResultView.setVisibility(TextView.INVISIBLE);
                     startActivityForResult(intent, Constants.REQUEST_IMAGE);
-                }
-                else {
-                    if(!GeneralUtil.checkStoragePermission(ChatActivity.this)) {
+                } else {
+                    if (!GeneralUtil.checkStoragePermission(ChatActivity.this)) {
                         GeneralUtil.requestStoragePermission(ChatActivity.this);
-                    } else if(!GeneralUtil.checkCameraPermission(ChatActivity.this)) {
+                    } else if (!GeneralUtil.checkCameraPermission(ChatActivity.this)) {
                         GeneralUtil.requestCameraPermission(ChatActivity.this);
                     }
                 }
@@ -231,13 +227,12 @@ public class ChatActivity extends AppCompatActivity {
                         null, new Date().getTime(), false
                 );
                 message.setId(mFirebaseDatabaseReference.child(Constants.MESSAGES_CHILD).child(familyCode).child(mChatId).push().getKey());
-                if(mImageUri != null) {
+                if (mImageUri != null) {
                     StorageReference storageReference = FirebaseStorage.getInstance()
                             .getReference(Constants.STORAGE_CHATS_CHILD).child(familyCode).child(mUid).child(mChatId).child(message.getId()).child(mImageUri.getLastPathSegment());
                     mChatMessage = message;
                     imageUploader.uploadImage(storageReference, mImageUri, ImageUtil.POST_IMAGE_MAX_SIZE);
-                }
-                else {
+                } else {
                     newMessage(message);
                 }
             }
@@ -262,8 +257,6 @@ public class ChatActivity extends AppCompatActivity {
         actionBarAdapter.setTitle(mChatName);
         actionBarAdapter.loadProfile(mChatPhotoUrl, this);
 
-        mGroupParticipants = new HashMap<String, Profile>();
-
         mFirebaseDatabaseReference.child(Constants.NOTIFICATIONS_CHILD).child(familyCode).child(mUid).child(Constants.CHAT_NOTIFICATION).child(mChatId).setValue(null);
 
     }
@@ -277,41 +270,18 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        // If group chat load participants
-        if(mGroupChat) {
-            if(mGroupParticipants.isEmpty()) {
-                loadGroupParticipants();
-            }
-        }
-        else {
-            loadChat();
-        }
+        loadChat();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.chat_menu, menu);
-        if(mGroupChat) {
-            menu.findItem(R.id.detailsBtn).setVisible(true);
-        }
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-
-            case R.id.detailsBtn: {
-                ArrayList<String> list = new ArrayList<>();
-                list.addAll(mGroupParticipants.keySet());
-                Intent intent = new Intent(ChatActivity.this, GroupDetailsActivity.class);
-                intent.putExtra(Constants.EXTRA_GROUP_PARTICIPANTS, list);
-                intent.putExtra(Constants.EXTRA_CHAT_PHOTOURL, mChatPhotoUrl);
-                intent.putExtra(Constants.EXTRA_CHAT_NAME, mChatName);
-                intent.putExtra(Constants.EXTRA_CHAT_ID, mChatId);
-                startActivity(intent);
-                return true;
-            }
+        switch (item.getItemId()) {
 
             case R.id.deleteBtn: {
                 confirmationDialog.show();
@@ -337,14 +307,13 @@ public class ChatActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 if (data != null) {
                     Uri temp = data.getData();
-                    if(temp != null) {
+                    if (temp != null) {
                         mImageUri = temp;
                     }
                     chatMessageForm.setImageUri(mImageUri, this);
                     chatMessageForm.setSend(true);
                     Log.d(TAG, "Uri: " + mImageUri.toString());
-                }
-                else {
+                } else {
                     chatMessageForm.setImageUri(mImageUri, this);
                     chatMessageForm.setSend(true);
                     Log.d(TAG, "Uri: " + mImageUri.toString());
@@ -375,7 +344,7 @@ public class ChatActivity extends AppCompatActivity {
                         .setQuery(messagesRef, parser)
                         .build();
 
-        if(chatRecyclerAdapter != null) {
+        if (chatRecyclerAdapter != null) {
             chatRecyclerAdapter.stopListening();
         }
 
@@ -396,24 +365,23 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onDataChanged() {
                 loadingDialog.hide();
-                if(chatRecyclerAdapter.getItemCount() == 0) {
+                if (chatRecyclerAdapter.getItemCount() == 0) {
                     mNoResultView.setVisibility(TextView.VISIBLE);
-                }
-                else {
+                } else {
                     scrollView();
                     // mMessageRecyclerView.smoothScrollToPosition(chatRecyclerAdapter.getItemCount() - 1);
                     DatabaseReference chatsRef = mFirebaseDatabaseReference.child(Constants.CHATS_CHILD).child(familyCode).child(mUid).child(mChatId);
                     chatsRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.exists()) {
+                            if (dataSnapshot.exists()) {
                                 mFirebaseDatabaseReference.child(Constants.CHATS_CHILD).child(familyCode).child(mUid).child(mChatId).child("notified").setValue(false);
                             }
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                            return ;
+                            return;
                         }
                     });
                 }
@@ -435,152 +403,72 @@ public class ChatActivity extends AppCompatActivity {
         chatRecyclerAdapter.startListening();
     }
 
-    private void loadGroupParticipants() {
-        loadingDialog.setText(getResources().getString(R.string.loading_chat));
-        loadingDialog.show();
+    private void newMessage(final ChatMessage msg) {
 
-        DatabaseReference groupRef = mFirebaseDatabaseReference.child(Constants.GROUPCHATUSERS_CHILD).child(familyCode).child(mChatId);
-        groupRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference chatsRef = mFirebaseDatabaseReference.child(Constants.CHATS_CHILD).child(familyCode).child(mUid).child(mChatId);
+
+        chatsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    final List<String> keys = new ArrayList<>();
-                    for(DataSnapshot id: dataSnapshot.getChildren()) {
-                        keys.add(id.getKey());
-                    }
-                    DatabaseReference ref = mFirebaseDatabaseReference.child(Constants.PROFILES_CHILD).child(familyCode);
-                    ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.exists()) {
-                                for(DataSnapshot profile: dataSnapshot.getChildren()) {
-                                    if(keys.contains(profile.getKey())) {
-                                        mGroupParticipants.put(profile.getKey() ,profile.getValue(Profile.class));
-                                    }
-                                }
-                                loadChat();
-                            }
-                        }
+                // check if chat already exists
+                Long time = new Date().getTime();
+                if (!dataSnapshot.exists()) {
+                    // Create new chats
+                    Chat chat1 = new Chat(mChatName, mChatPhotoUrl, mUid, mChatUserId, msg.getMessage(), time, false);
+                    databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[]{Constants.CHATS_CHILD, familyCode, mUid, mChatId}), chat1);
+                    Chat chat2 = new Chat(mUsername, mPhotoUrl, mUid, mChatUserId, msg.getMessage(), time, true);
+                    databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[]{Constants.CHATS_CHILD, familyCode, mChatUserId, mChatId}), chat2);
+                } else {
+                    // update latest message for chat1
+                    databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[]{Constants.CHATS_CHILD, familyCode, mUid, mChatId, "latestMessage"}), msg.getMessage());
+                    databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[]{Constants.CHATS_CHILD, familyCode, mUid, mChatId, "latestActivity"}), time);
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            Log.d(TAG, "Unable to load group participants...");
-                            Toast.makeText(ChatActivity.this, getResources().getString(R.string.error_loading_chat), Toast.LENGTH_SHORT).show();
-                            loadingDialog.hide();
-                        }
-                    });
+                    // update latest message for chat2
+                    databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[]{Constants.CHATS_CHILD, familyCode, mChatUserId, mChatId, "latestMessage"}), msg.getMessage());
+                    databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[]{Constants.CHATS_CHILD, familyCode, mChatUserId, mChatId, "latestActivity"}), time);
+                    databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[]{Constants.CHATS_CHILD, familyCode, mChatUserId, mChatId, "notified"}), true);
                 }
+
+                // create new message
+                databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[]{Constants.MESSAGES_CHILD, familyCode, mChatId, msg.getId()}), msg);
+
+                mFirebaseDatabaseReference.updateChildren(databaseUpdates, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if (databaseError == null) {
+                            databaseUpdates.clear();
+                            chatMessageForm.reset(ChatActivity.this);
+                        } else {
+                            Log.w(TAG, "Send message failed for chat: " + mChatId + " for user: " + mUid + ". ", databaseError.toException());
+                            Toast.makeText(ChatActivity.this, getResources().getString(R.string.error_sending_message), Toast.LENGTH_SHORT).show();
+                        }
+                        loadingDialog.hide();
+                    }
+                });
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.d(TAG, "Unable to load group participants...");
-                Toast.makeText(ChatActivity.this, getResources().getString(R.string.error_loading_chat), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onCancelled:" + databaseError);
+                Toast.makeText(ChatActivity.this, getResources().getString(R.string.error_creating_chat), Toast.LENGTH_SHORT).show();
                 loadingDialog.hide();
             }
         });
-    }
-
-    private void newMessage(final ChatMessage msg) {
-        if(mGroupChat) {
-            // create new message
-            databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[] {Constants.MESSAGES_CHILD, familyCode, mChatId, msg.getId()}), msg);
-            databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[] {Constants.GROUPCHATS_CHILD, familyCode, mChatId, "latestMessage"}), msg.getMessage());
-            final Long latest = new Date().getTime();
-            databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[] {Constants.GROUPCHATS_CHILD, familyCode, mChatId, "latestActivity"}), latest);
-            // Update group chat
-            mFirebaseDatabaseReference.updateChildren(databaseUpdates, new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                    if(databaseError == null) {
-                        databaseUpdates.clear();
-                        for(String key : mGroupParticipants.keySet()) {
-                            if(!key.equals(mUid)) {
-                                databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[] {Constants.CHATS_CHILD, familyCode, key, mChatId, "notified"}), true);
-                            }
-                            databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[] {Constants.CHATS_CHILD, familyCode, key, mChatId, "latestActivity"}), latest);
-                        }
-                        mFirebaseDatabaseReference.updateChildren(databaseUpdates);
-                        databaseUpdates.clear();
-                        chatMessageForm.reset(ChatActivity.this);
-                    }
-                    else {
-                        Log.w(TAG, "Send message failed for chat: " + mChatId + " for user: " + mUid + ". ", databaseError.toException());
-                        Toast.makeText(ChatActivity.this, getResources().getString(R.string.error_sending_message), Toast.LENGTH_SHORT).show();
-                    }
-                    loadingDialog.hide();
-                }
-            });
-        }
-        else {
-            DatabaseReference chatsRef = mFirebaseDatabaseReference.child(Constants.CHATS_CHILD).child(familyCode).child(mUid).child(mChatId);
-
-            chatsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // check if chat already exists
-                    Long time = new Date().getTime();
-                    if (!dataSnapshot.exists()) {
-                        // Create new chats
-                        Chat chat1 = new Chat(mChatName, mChatPhotoUrl, mUid, mChatUserId, msg.getMessage(), time, false);
-                        databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[] {Constants.CHATS_CHILD, familyCode, mUid, mChatId}), chat1);
-                        Chat chat2 = new Chat(mUsername, mPhotoUrl, mUid, mChatUserId, msg.getMessage(), time, true);
-                        databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[] {Constants.CHATS_CHILD, familyCode, mChatUserId, mChatId}), chat2);
-                    }
-                    else {
-                        // update latest message for chat1
-                        databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[] {Constants.CHATS_CHILD, familyCode, mUid, mChatId, "latestMessage"}), msg.getMessage());
-                        databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[] {Constants.CHATS_CHILD, familyCode, mUid, mChatId, "latestActivity"}), time);
-
-                        // update latest message for chat2
-                        databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[] {Constants.CHATS_CHILD, familyCode, mChatUserId, mChatId, "latestMessage"}), msg.getMessage());
-                        databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[] {Constants.CHATS_CHILD, familyCode, mChatUserId, mChatId, "latestActivity"}), time);
-                        databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[] {Constants.CHATS_CHILD, familyCode, mChatUserId, mChatId, "notified"}), true);
-                    }
-
-                    // create new message
-                    databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[] {Constants.MESSAGES_CHILD, familyCode, mChatId, msg.getId()}), msg);
-
-                    mFirebaseDatabaseReference.updateChildren(databaseUpdates, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                            if(databaseError == null) {
-                                databaseUpdates.clear();
-                                chatMessageForm.reset(ChatActivity.this);
-                            }
-                            else {
-                                Log.w(TAG, "Send message failed for chat: " + mChatId + " for user: " + mUid + ". ", databaseError.toException());
-                                Toast.makeText(ChatActivity.this, getResources().getString(R.string.error_sending_message), Toast.LENGTH_SHORT).show();
-                            }
-                            loadingDialog.hide();
-                        }
-                    });
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.d(TAG, "onCancelled:" + databaseError);
-                    Toast.makeText(ChatActivity.this, getResources().getString(R.string.error_creating_chat), Toast.LENGTH_SHORT).show();
-                    loadingDialog.hide();
-                }
-            });
-        }
     }
 
     private void deleteChat() {
         loadingDialog.setText(getResources().getString(R.string.deleting_chat));
         loadingDialog.show();
 
-        databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[] {Constants.CHATS_CHILD, familyCode, mUid, mChatId}), null);
+        databaseUpdates.put(DatabaseUtil.getDatabasePath(new String[]{Constants.CHATS_CHILD, familyCode, mUid, mChatId}), null);
 
         mFirebaseDatabaseReference.updateChildren(databaseUpdates, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                if(databaseError == null) {
+                if (databaseError == null) {
                     databaseUpdates.clear();
                     startActivity(new Intent(ChatActivity.this, ChatsActivity.class));
-                }
-                else {
+                } else {
                     Log.w(TAG, "Delete chat failed for chat: " + mChatId + " for user: " + mUid + ". ", databaseError.toException());
                     Toast.makeText(ChatActivity.this, getResources().getString(R.string.error_deleting_chat), Toast.LENGTH_SHORT).show();
                     loadingDialog.hide();
@@ -609,14 +497,6 @@ public class ChatActivity extends AppCompatActivity {
 
     public void setLastUserId(String id) {
         mLastUserId = id;
-    }
-
-    public boolean isGroupChat() {
-        return mGroupChat;
-    }
-
-    public Map<String, Profile> getGroupParticipants() {
-        return mGroupParticipants;
     }
 
 }

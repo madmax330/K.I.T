@@ -61,12 +61,6 @@
             android:parentActivityName=".ChatsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".GroupDetailsActivity"
-            android:label="@string/group_details"
-            android:parentActivityName=".ChatsActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity
             android:name=".EditProfileActivity"
             android:label="@string/edit_profile"
             android:parentActivityName=".ProfileActivity"

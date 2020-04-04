@@ -58,7 +58,7 @@
                         android:layout_centerVertical="true"
                         android:text="@string/na"
                         android:layout_toEndOf="@+id/imageView"
-                        android:layout_toStartOf="@id/editBtn"
+                        android:layout_toStartOf="@id/editFamilyBtn"
                         android:textSize="18sp"/>
 
                     <Button

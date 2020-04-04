@@ -56,8 +56,6 @@ public class NewChatActivity extends AppCompatActivity {
     private RecyclerView mProfileRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
 
-    private RelativeLayout mGroupLayout;
-
     private LoadingDialog loadingDialog;
 
     // Program variables
@@ -103,7 +101,6 @@ public class NewChatActivity extends AppCompatActivity {
         mProfileRecyclerView = (RecyclerView) findViewById(R.id.profilesRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mProfileRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mGroupLayout = (RelativeLayout) findViewById(R.id.groupLayout);
 
         // Load profiles
         mProfileList = new ArrayList<Profile>();
@@ -135,14 +132,6 @@ public class NewChatActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String s) {
                 profileAdapter.filterContacts(s);
                 return true;
-            }
-        });
-
-        // Handle new group chat
-        mGroupLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(NewChatActivity.this, GroupDetailsActivity.class));
             }
         });
 

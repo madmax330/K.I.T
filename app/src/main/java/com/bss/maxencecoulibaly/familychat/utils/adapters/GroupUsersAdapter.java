@@ -6,10 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.bss.maxencecoulibaly.familychat.GroupDetailsActivity;
 import com.bss.maxencecoulibaly.familychat.R;
 import com.bss.maxencecoulibaly.familychat.utils.images.ImageUtil;
 import com.bss.maxencecoulibaly.familychat.utils.models.Profile;
