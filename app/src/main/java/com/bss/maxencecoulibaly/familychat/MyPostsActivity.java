@@ -157,6 +157,7 @@ public class MyPostsActivity extends AppCompatActivity {
     }
 
     private void loadPosts() {
+        Log.d(TAG, "Called load posts");
         loadingDialog.setText(getResources().getString(R.string.loading_posts));
         loadingDialog.show();
 
@@ -177,7 +178,9 @@ public class MyPostsActivity extends AppCompatActivity {
                                         Post temp = snap.getValue(Post.class);
                                         temp.setId(snap.getKey());
                                         posts.add(temp);
+                                        Log.d(TAG, "Added post " + temp.getId() + " now " + posts.size() + " posts of " + dataSnapshot.getChildrenCount());
                                         if(posts.size() == (int) dataSnapshot.getChildrenCount()) {
+                                            Log.d(TAG, "All posts set removing loader");
                                             myPostsAdapter.setResults(posts);
                                             loadingDialog.hide();
                                         }
@@ -190,6 +193,7 @@ public class MyPostsActivity extends AppCompatActivity {
                                 }
                             });
                         }
+                        Log.d(TAG, "All posts should have loaded for user");
                     }
                     else {
                         mNoResultView.setVisibility(TextView.VISIBLE);

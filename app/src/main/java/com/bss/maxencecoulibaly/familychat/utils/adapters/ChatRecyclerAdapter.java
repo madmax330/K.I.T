@@ -125,14 +125,6 @@ public abstract class ChatRecyclerAdapter extends FirebaseRecyclerAdapter<ChatMe
             viewHolder.rCell.setVisibility(LinearLayout.VISIBLE);
             viewHolder.sCell.setVisibility(LinearLayout.GONE);
             if(message.getMessage() != null) {
-                if(activity.isGroupChat()) {
-                    // Get chat user profile
-                    Profile profile = activity.getGroupParticipants().get(message.getUserId());
-                    if(!activity.getLastUserId().equals(profile.getUserId())){
-                        activity.setLastUserId(profile.getUserId());
-                        viewHolder.msgSenderView.setText(profile.getName());
-                    }
-                }
                 viewHolder.rMsgView.setText(message.getMessage());
                 viewHolder.rMsgView.setVisibility(TextView.VISIBLE);
             }

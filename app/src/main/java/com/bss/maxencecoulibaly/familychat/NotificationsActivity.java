@@ -16,23 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bss.maxencecoulibaly.familychat.utils.Constants;
-import com.bss.maxencecoulibaly.familychat.utils.adapters.ChatListRecyclerAdapter;
 import com.bss.maxencecoulibaly.familychat.utils.adapters.NotificationsRecyclerAdapter;
 import com.bss.maxencecoulibaly.familychat.utils.dialogs.LoadingDialog;
 import com.bss.maxencecoulibaly.familychat.utils.models.Chat;
 import com.bss.maxencecoulibaly.familychat.utils.models.Family;
-import com.bss.maxencecoulibaly.familychat.utils.models.GroupChat;
 import com.bss.maxencecoulibaly.familychat.utils.models.Notification;
-import com.bss.maxencecoulibaly.familychat.utils.models.UserFamily;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.firebase.ui.database.SnapshotParser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.security.acl.Group;
 
 public class NotificationsActivity extends AppCompatActivity {
 
@@ -101,30 +94,27 @@ public class NotificationsActivity extends AppCompatActivity {
 
                 switch (notification.getCategory()) {
                     case Constants.NOTIFICATION_CHAT:
-                        if(notification.getFamily().equals(familyCode)) {
+                        if (notification.getFamily().equals(familyCode)) {
                             toChatActivity(notification);
-                        }
-                        else {
-                            changeFamily(notification.getFamily(), notification);
+                        } else {
+                            changeFamily(notification);
                         }
                         break;
 
                     case Constants.NOTIFICATION_COMMENT: {
-                        if(notification.getFamily().equals(familyCode)) {
+                        if (notification.getFamily().equals(familyCode)) {
                             toCommentsActivity(notification);
-                        }
-                        else {
-                            changeFamily(notification.getFamily(), notification);
+                        } else {
+                            changeFamily(notification);
                         }
                         break;
                     }
 
                     case Constants.NOTIFICATION_LIKE: {
-                        if(notification.getFamily().equals(familyCode)) {
+                        if (notification.getFamily().equals(familyCode)) {
                             toLikesActivity(notification);
-                        }
-                        else {
-                            changeFamily(notification.getFamily(), notification);
+                        } else {
+                            changeFamily(notification);
                         }
                         break;
                     }
@@ -153,28 +143,26 @@ public class NotificationsActivity extends AppCompatActivity {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         final String type = snapshot.getKey();
-                        if(type.equals(Constants.CHAT_NOTIFICATION)) {
-                            for(DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        if (type.equals(Constants.CHAT_NOTIFICATION)) {
+                            for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                                final Notification notification = snapshot1.getValue(Notification.class);
+                                notification.setId(snapshot1.getKey());
+                                notificationsRecyclerAdapter.addNotification(notification);
+                            }
+                        } else {
+                            for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                                 final Notification notification = snapshot1.getValue(Notification.class);
                                 notification.setId(snapshot1.getKey());
                                 notificationsRecyclerAdapter.addNotification(notification);
                             }
                         }
-                        else {
-                            for(DataSnapshot snapshot1 : snapshot.getChildren()) {
-                                    final Notification notification = snapshot1.getValue(Notification.class);
-                                    notification.setId(snapshot1.getKey());
-                                    notificationsRecyclerAdapter.addNotification(notification);
-                            }
-                        }
                     }
                     notificationsRecyclerAdapter.notifyDataSetChanged();
                     loadingDialog.hide();
-                }
-                else {
+                } else {
                     mNoResultView.setVisibility(TextView.VISIBLE);
                     loadingDialog.hide();
                 }
@@ -195,47 +183,19 @@ public class NotificationsActivity extends AppCompatActivity {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
+                if (dataSnapshot.exists()) {
                     Chat chat = dataSnapshot.getValue(Chat.class);
                     chat.setId(dataSnapshot.getKey());
-                    if(chat.getUser2() == null) {
-                        DatabaseReference reference = mFirebaseDatabaseReference.child(Constants.GROUPCHATS_CHILD).child(notification.getFamily()).child(chat.getId());
-                        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if(dataSnapshot.exists()) {
-                                    GroupChat groupChat = dataSnapshot.getValue(GroupChat.class);
-                                    groupChat.setId(dataSnapshot.getKey());
-                                    Intent intent = new Intent(NotificationsActivity.this, ChatActivity.class);
-                                    intent.putExtra(Constants.EXTRA_CHAT_ID, groupChat.getId());
-                                    // Pass chat ID, chat user ID, chat user name, chat user photo url
-                                    intent.putExtra(Constants.EXTRA_GROUP_CHAT,true);
-                                    intent.putExtra(Constants.EXTRA_CHAT_NAME, groupChat.getName());
-                                    intent.putExtra(Constants.EXTRA_CHAT_PHOTOURL, groupChat.getPhotoUrl());
-                                    startActivity(intent);
-                                }
-                                else {
-                                    startActivity(new Intent(NotificationsActivity.this, ChatsActivity.class));
-                                }
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                startActivity(new Intent(NotificationsActivity.this, ChatsActivity.class));
-                            }
-                        });
-                    }
-                    else {
-                        Intent intent = new Intent(NotificationsActivity.this, ChatActivity.class);
-                        intent.putExtra(Constants.EXTRA_CHAT_ID, chat.getId());
-                        // Pass chat ID, chat user ID, chat user name, chat user photo url
-                        intent.putExtra(Constants.EXTRA_CHAT_USER_ID, ((chat.getUser1().equals(mUid)) ? chat.getUser2() : chat.getUser1()));
-                        intent.putExtra(Constants.EXTRA_CHAT_NAME, chat.getName());
-                        intent.putExtra(Constants.EXTRA_CHAT_PHOTOURL, chat.getPhotoUrl());
-                        startActivity(intent);
-                    }
-                }
-                else {
+                    Intent intent = new Intent(NotificationsActivity.this, ChatActivity.class);
+                    intent.putExtra(Constants.EXTRA_CHAT_ID, chat.getId());
+                    // Pass chat ID, chat user ID, chat user name, chat user photo url
+                    intent.putExtra(Constants.EXTRA_CHAT_USER_ID, ((chat.getUser1().equals(mUid)) ? chat.getUser2() : chat.getUser1()));
+                    intent.putExtra(Constants.EXTRA_CHAT_NAME, chat.getName());
+                    intent.putExtra(Constants.EXTRA_CHAT_PHOTOURL, chat.getPhotoUrl());
+                    startActivity(intent);
+
+                } else {
                     startActivity(new Intent(NotificationsActivity.this, ChatsActivity.class));
                 }
             }
@@ -261,13 +221,13 @@ public class NotificationsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void changeFamily(String code, final Notification notification) {
+    private void changeFamily(final Notification notification) {
 
         DatabaseReference familyRef = mFirebaseDatabaseReference.child(Constants.FAMILIES_CHILD).child(notification.getFamily());
         familyRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
+                if (dataSnapshot.exists()) {
                     Family family = dataSnapshot.getValue(Family.class);
                     SharedPreferences.Editor editor = mSharedPreferences.edit();
                     editor.putString(Constants.PREF_FAMILY_CODE, family.getCode());

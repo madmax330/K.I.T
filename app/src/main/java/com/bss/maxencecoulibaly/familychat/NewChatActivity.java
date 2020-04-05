@@ -3,7 +3,6 @@ package com.bss.maxencecoulibaly.familychat;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,24 +10,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bss.maxencecoulibaly.familychat.utils.Constants;
 import com.bss.maxencecoulibaly.familychat.utils.adapters.ProfileAdapter;
 import com.bss.maxencecoulibaly.familychat.utils.dialogs.LoadingDialog;
-import com.bss.maxencecoulibaly.familychat.utils.images.ImageUtil;
 import com.bss.maxencecoulibaly.familychat.utils.models.Profile;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,11 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewChatActivity extends AppCompatActivity {
 
@@ -62,10 +47,6 @@ public class NewChatActivity extends AppCompatActivity {
     private String familyCode;
 
     private String mUid;
-    private String mUsername;
-    private String mPhotoUrl;
-
-    private List<Profile> mProfileList;
 
     private SharedPreferences mSharedPreferences;
     // Firebase instance variables
@@ -80,8 +61,6 @@ public class NewChatActivity extends AppCompatActivity {
         mSharedPreferences = getSharedPreferences(Constants.USERS_PREFS, Context.MODE_PRIVATE);
 
         mUid = mSharedPreferences.getString(Constants.PREF_USER_ID, null);
-        mUsername = mSharedPreferences.getString(Constants.PREF_USER_NAME, null);
-        mPhotoUrl = mSharedPreferences.getString(Constants.PREF_USER_PHOTO_URL, null);
 
         familyCode = mSharedPreferences.getString(Constants.PREF_FAMILY_CODE, null);
 
@@ -101,9 +80,6 @@ public class NewChatActivity extends AppCompatActivity {
         mProfileRecyclerView = (RecyclerView) findViewById(R.id.profilesRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mProfileRecyclerView.setLayoutManager(mLinearLayoutManager);
-
-        // Load profiles
-        mProfileList = new ArrayList<Profile>();
 
         profileAdapter = new ProfileAdapter(this, "left") {
             @Override

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "635293567078-i0t56ic2glhsq8bf66bmi2gvlm43fgph.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bss.maxencecoulibaly.familychat",
+            "certificate_hash": "fc2f6968b2f36565ca74f7c5b177cbc5e212a7ee"
+          }
+        },
+        {
           "client_id": "635293567078-hh0dipv7ahp5p5h2pl3kkgua88rfjc5r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -33,20 +41,20 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "635293567078-n0n75jmbcjdh6ue32p3pf28sphoptfds.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "635293567078-j0l7l1oprdls0ee6ideq89tavbk6en0u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.maxencecoulibaly.kit"
+              }
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

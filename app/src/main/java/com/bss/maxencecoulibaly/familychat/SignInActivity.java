@@ -116,6 +116,8 @@ public class SignInActivity extends AppCompatActivity implements
             } else {
                 // Google Sign-In failed
                 Log.e(TAG, "Google Sign-In failed.");
+                Log.e(TAG, result.toString());
+                Log.e(TAG, result.getStatus().toString());
             }
         }
     }
