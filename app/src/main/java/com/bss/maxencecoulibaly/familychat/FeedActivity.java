@@ -16,15 +16,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,22 +34,11 @@ import com.bss.maxencecoulibaly.familychat.utils.adapters.FeedRecyclerAdapter;
 import com.bss.maxencecoulibaly.familychat.utils.dialogs.FamiliesDialog;
 import com.bss.maxencecoulibaly.familychat.utils.dialogs.FullScreenImageDialog;
 import com.bss.maxencecoulibaly.familychat.utils.dialogs.LoadingDialog;
-import com.bss.maxencecoulibaly.familychat.utils.images.ImageUtil;
-import com.bss.maxencecoulibaly.familychat.utils.images.TouchImageView;
 import com.bss.maxencecoulibaly.familychat.utils.models.Post;
 import com.bss.maxencecoulibaly.familychat.utils.models.PostLike;
-import com.bss.maxencecoulibaly.familychat.utils.models.Profile;
 import com.bss.maxencecoulibaly.familychat.utils.models.UserFamily;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -62,12 +47,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FeedActivity extends AppCompatActivity {
 
@@ -108,7 +91,6 @@ public class FeedActivity extends AppCompatActivity {
 
     private String mUid;
     private String mUsername;
-    private String mPhotoUrl;
     private String mPostCategory;
 
     private SharedPreferences mSharedPreferences;
@@ -130,7 +112,6 @@ public class FeedActivity extends AppCompatActivity {
 
         mUid = mSharedPreferences.getString(Constants.PREF_USER_ID, null);
         mUsername = mSharedPreferences.getString(Constants.PREF_USER_NAME, null);
-        mPhotoUrl = mSharedPreferences.getString(Constants.PREF_USER_PHOTO_URL, null);
 
         // Initialize Firebase Realtime Database
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();

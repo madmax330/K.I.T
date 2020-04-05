@@ -2,7 +2,6 @@ package com.bss.maxencecoulibaly.familychat.utils.services;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.bss.maxencecoulibaly.familychat.utils.Constants;

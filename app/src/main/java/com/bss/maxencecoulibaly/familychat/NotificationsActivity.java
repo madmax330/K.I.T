@@ -46,8 +46,6 @@ public class NotificationsActivity extends AppCompatActivity {
     private String familyCode;
 
     private String mUid;
-    private String mUsername;
-    private String mPhotoUrl;
 
     private SharedPreferences mSharedPreferences;
     // Firebase instance variables
@@ -62,8 +60,6 @@ public class NotificationsActivity extends AppCompatActivity {
         mSharedPreferences = getSharedPreferences(Constants.USERS_PREFS, Context.MODE_PRIVATE);
 
         mUid = mSharedPreferences.getString(Constants.PREF_USER_ID, null);
-        mUsername = mSharedPreferences.getString(Constants.PREF_USER_NAME, null);
-        mPhotoUrl = mSharedPreferences.getString(Constants.PREF_USER_PHOTO_URL, null);
 
         familyCode = mSharedPreferences.getString(Constants.PREF_FAMILY_CODE, null);
 

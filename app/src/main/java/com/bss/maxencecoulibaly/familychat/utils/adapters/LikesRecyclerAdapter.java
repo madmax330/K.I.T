@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bss.maxencecoulibaly.familychat.LikesActivity;
 import com.bss.maxencecoulibaly.familychat.R;
 import com.bss.maxencecoulibaly.familychat.utils.Constants;
 import com.bss.maxencecoulibaly.familychat.utils.images.ImageUtil;

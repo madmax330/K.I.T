@@ -1,7 +1,6 @@
 package com.bss.maxencecoulibaly.familychat.utils.forms;
 
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
@@ -15,8 +14,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bss.maxencecoulibaly.familychat.ChatActivity;
-import com.bss.maxencecoulibaly.familychat.NewPostActivity;
 import com.bss.maxencecoulibaly.familychat.R;
 import com.bss.maxencecoulibaly.familychat.utils.Constants;
 import com.bss.maxencecoulibaly.familychat.utils.GeneralUtil;

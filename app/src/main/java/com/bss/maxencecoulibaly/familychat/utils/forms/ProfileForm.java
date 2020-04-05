@@ -18,7 +18,6 @@ import com.bss.maxencecoulibaly.familychat.utils.Constants;
 import com.bss.maxencecoulibaly.familychat.utils.GeneralUtil;
 import com.bss.maxencecoulibaly.familychat.utils.models.Profile;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;

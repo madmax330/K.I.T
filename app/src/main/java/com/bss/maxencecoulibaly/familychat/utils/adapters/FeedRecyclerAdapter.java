@@ -19,7 +19,6 @@ import com.bss.maxencecoulibaly.familychat.R;
 import com.bss.maxencecoulibaly.familychat.utils.Constants;
 import com.bss.maxencecoulibaly.familychat.utils.images.ImageUtil;
 import com.bss.maxencecoulibaly.familychat.utils.models.Post;
-import com.bss.maxencecoulibaly.familychat.utils.models.PostLike;
 import com.bss.maxencecoulibaly.familychat.utils.models.Profile;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -33,8 +32,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

@@ -1,7 +1,5 @@
 package com.bss.maxencecoulibaly.familychat.utils.models;
 
-import android.view.LayoutInflater;
-
 /**
  * Created by maxencecoulibaly on 2/25/18.
  */

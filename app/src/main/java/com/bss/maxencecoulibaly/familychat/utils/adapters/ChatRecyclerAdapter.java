@@ -7,16 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bss.maxencecoulibaly.familychat.ChatActivity;
-import com.bss.maxencecoulibaly.familychat.FeedActivity;
 import com.bss.maxencecoulibaly.familychat.R;
 import com.bss.maxencecoulibaly.familychat.utils.images.ImageUtil;
 import com.bss.maxencecoulibaly.familychat.utils.models.ChatMessage;
-import com.bss.maxencecoulibaly.familychat.utils.models.Profile;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;

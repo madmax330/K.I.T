@@ -10,18 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bss.maxencecoulibaly.familychat.R;
-import com.bss.maxencecoulibaly.familychat.utils.models.Chat;
 import com.bss.maxencecoulibaly.familychat.utils.models.Notification;
-import com.bss.maxencecoulibaly.familychat.utils.models.Profile;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public abstract class NotificationsRecyclerAdapter extends RecyclerView.Adapter<NotificationsRecyclerAdapter.NotificationViewHolder> {
 

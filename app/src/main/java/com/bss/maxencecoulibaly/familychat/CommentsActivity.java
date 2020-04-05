@@ -12,18 +12,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,13 +34,8 @@ import com.bss.maxencecoulibaly.familychat.utils.models.Profile;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -89,8 +77,6 @@ public class CommentsActivity extends AppCompatActivity {
     private String familyCode;
 
     private String mUid;
-    private String mUsername;
-    private String mPhotoUrl;
     private String mPostId;
 
     private Post mPost;
@@ -109,8 +95,6 @@ public class CommentsActivity extends AppCompatActivity {
         mSharedPreferences = getSharedPreferences(Constants.USERS_PREFS, Context.MODE_PRIVATE);
 
         mUid = mSharedPreferences.getString(Constants.PREF_USER_ID, null);
-        mUsername = mSharedPreferences.getString(Constants.PREF_USER_NAME, null);
-        mPhotoUrl = mSharedPreferences.getString(Constants.PREF_USER_PHOTO_URL, null);
 
         familyCode = mSharedPreferences.getString(Constants.PREF_FAMILY_CODE, null);
 

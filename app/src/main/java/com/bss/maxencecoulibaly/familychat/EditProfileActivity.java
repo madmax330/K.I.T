@@ -60,8 +60,6 @@ public class EditProfileActivity extends AppCompatActivity {
     private String familyCode;
 
     private String mUid;
-    private String mUsername;
-    private String mPhotoUrl;
     private String mUserId;
     private Profile mUserProfile;
 
@@ -85,8 +83,6 @@ public class EditProfileActivity extends AppCompatActivity {
         mSharedPreferences = getSharedPreferences(Constants.USERS_PREFS, Context.MODE_PRIVATE);
 
         mUid = mSharedPreferences.getString(Constants.PREF_USER_ID, null);
-        mUsername = mSharedPreferences.getString(Constants.PREF_USER_NAME, null);
-        mPhotoUrl = mSharedPreferences.getString(Constants.PREF_USER_PHOTO_URL, null);
 
         familyCode = mSharedPreferences.getString(Constants.PREF_FAMILY_CODE, null);
 

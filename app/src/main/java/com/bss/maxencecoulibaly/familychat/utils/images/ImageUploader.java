@@ -1,7 +1,6 @@
 package com.bss.maxencecoulibaly.familychat.utils.images;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapRegionDecoder;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -14,7 +13,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public abstract class ImageUploader {

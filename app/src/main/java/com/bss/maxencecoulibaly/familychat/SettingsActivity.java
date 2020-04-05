@@ -3,7 +3,6 @@ package com.bss.maxencecoulibaly.familychat;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -19,7 +18,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,12 +29,10 @@ import com.bss.maxencecoulibaly.familychat.utils.adapters.FamilyRecyclerAdapter;
 import com.bss.maxencecoulibaly.familychat.utils.dialogs.ConfirmationDialog;
 import com.bss.maxencecoulibaly.familychat.utils.dialogs.EditFamilyDialog;
 import com.bss.maxencecoulibaly.familychat.utils.dialogs.FamiliesDialog;
-import com.bss.maxencecoulibaly.familychat.utils.dialogs.FullScreenImageDialog;
 import com.bss.maxencecoulibaly.familychat.utils.dialogs.LoadingDialog;
 import com.bss.maxencecoulibaly.familychat.utils.forms.FamilyForm;
 import com.bss.maxencecoulibaly.familychat.utils.images.ImageUploader;
 import com.bss.maxencecoulibaly.familychat.utils.images.ImageUtil;
-import com.bss.maxencecoulibaly.familychat.utils.models.Family;
 import com.bss.maxencecoulibaly.familychat.utils.models.UserFamily;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
@@ -44,22 +40,18 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
 
 public class SettingsActivity extends AppCompatActivity
         implements GoogleApiClient.OnConnectionFailedListener {

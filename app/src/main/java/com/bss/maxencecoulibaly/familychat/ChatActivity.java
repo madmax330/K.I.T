@@ -37,7 +37,6 @@ import com.bss.maxencecoulibaly.familychat.utils.images.ImageUploader;
 import com.bss.maxencecoulibaly.familychat.utils.images.ImageUtil;
 import com.bss.maxencecoulibaly.familychat.utils.models.Chat;
 import com.bss.maxencecoulibaly.familychat.utils.models.ChatMessage;
-import com.bss.maxencecoulibaly.familychat.utils.models.Profile;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
 import com.google.firebase.database.DataSnapshot;
@@ -50,10 +49,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
